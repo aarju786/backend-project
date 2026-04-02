@@ -1,7 +1,10 @@
 const mongoose = require ("mongoose")
 const express = require ("express")
-const {evenodd} = require("./Controller/Usercontroller")
-const app = express();
+const routes = require("./Routes/Userroutes")
+
+const app = express()
+
+app.use(express.json())
 
 const port = 5000;
 
@@ -13,6 +16,8 @@ mongoose.connect(mogourl)
 .then(() => console.log(`mongo db connect`))
 .catch((e) => console.log(`mongo db error ${e}`))
 
+
+app.use("/", routes)
+
 app.listen(port, () => {console.log(`server is running on port ${port}`)})
 
-console.log(evenodd(2));
