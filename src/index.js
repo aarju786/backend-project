@@ -1,17 +1,21 @@
 const mongoose = require ("mongoose")
 const express = require ("express")
 const routes = require("./Routes/Userroutes")
+const dotenv = require("dotenv")
+
+dotenv.config()
 
 const app = express()
-
 app.use(express.json())
 
-const port = 5000;
-
-const mogourl = "mongodb+srv://sharmaarju049_db_user:WjuOTf3xufIasF8N@aarju.cpli5s7.mongodb.net/?appName=Aarju"
+const port = process.env.port ||8000
 
 
-mongoose.connect(mogourl)
+
+
+
+
+mongoose.connect(process.env.mogourl)
 
 .then(() => console.log(`mongo db connect`))
 .catch((e) => console.log(`mongo db error ${e}`))
@@ -19,5 +23,5 @@ mongoose.connect(mogourl)
 
 app.use("/", routes)
 
-app.listen(port, () => {console.log(`server is running on port ${port}`)})
+app.listen(process.env.port, () => {console.log(`server is running on port ${process.env.port}`)})
 
